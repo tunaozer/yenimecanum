@@ -4,9 +4,10 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,13 +30,13 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   private MecanumDrive m_robotDrive;
-  private Joystick m_stick;
+  private PS4Controller m_stick;
   @Override
   public void robotInit() {
-        WPI_TalonSRX motor_solOn = new WPI_TalonSRX(1);
-        WPI_TalonSRX motor_solArka = new WPI_TalonSRX(2);
-        WPI_TalonSRX motor_sagOn = new WPI_TalonSRX(13);
-        WPI_TalonSRX motor_sagArka = new WPI_TalonSRX(12);
+        WPI_VictorSPX motor_solOn = new  WPI_VictorSPX(1);
+         WPI_VictorSPX motor_solArka = new  WPI_VictorSPX(2);
+         WPI_VictorSPX motor_sagOn = new WPI_VictorSPX(13);
+        WPI_VictorSPX motor_sagArka = new  WPI_VictorSPX(12);
 
         motor_sagOn.setInverted(true);
         motor_sagArka.setInverted(true);
@@ -47,7 +48,7 @@ public class Robot extends TimedRobot {
             motor_sagArka
         );
 
-        m_stick =new Joystick(0);
+        m_stick =new PS4Controller(0);
 
   }
 
@@ -99,7 +100,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotDrive.driveCartesian(-m_stick.getY(), -m_stick.getX(), -m_stick.getZ());
+    m_robotDrive.driveCartesian(-m_stick.getLeftY(), -m_stick.getLeftX(), -m_stick.getPOV());
   }
 
   /** This function is called once when the robot is disabled. */
